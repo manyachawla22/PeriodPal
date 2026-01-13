@@ -24,7 +24,7 @@ def get_rag():
 rag = get_rag()
 
 st.write("---")
-query = st.text_input("Ask Period Pal a question", value="Why do I get headaches before my period?")
+query = st.text_input("Ask Period Pal a question", value="Why do I get cramps before my period?")
 
 if st.button("Ask"):
     if not query.strip():
