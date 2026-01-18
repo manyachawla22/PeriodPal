@@ -1,32 +1,43 @@
+# 🌸 PeriodPal: AI-Powered Menstrual Health Assistant
 
-# Period Pal — Minimal RAG Chatbot (Student Project)
+PeriodPal is an advanced health tracking application that combines **Machine Learning (Clustering & Prophet)** with **RAG (Retrieval-Augmented Generation)** to provide personalized cycle predictions and clinical symptom analysis.
 
-This is a lightweight Retrieval-Augmented Generation (RAG) demo for menstrual health Q&A.
-It is intended as a **GitHub-ready** student project you can present on your resume and demo in interviews.
+## 🚀 Features
+- **Cycle Prediction:** Uses Facebook Prophet for time-series forecasting of next period dates.
+- **User Clustering:** Groups users into biological clusters using K-Means to identify health patterns.
+- **Medical RAG:** A custom Retrieval-Augmented Generation engine using **ChromaDB** and **Sentence Transformers** to search clinical datasets (Training/Testing Data) for symptom advice.
+- **Interactive Dashboard:** Built with Streamlit for a seamless user experience.
 
-## What's included
-- `main.py` — Streamlit app to ask questions and see retrieved passages + generated answer
-- `rag.py` — simple RAG backend (SentenceTransformers + FAISS + HuggingFace generator)
-- `data/docs.txt` — small sample knowledge base (you should expand this)
-- `requirements.txt` — Python dependencies
+## 📂 Project Structure
+- `app.py`: The main Streamlit interface.
+- `main_pipeline.py`: The core engine connecting ML models.
+- `rag.py`: Logic for medical document retrieval and AI responses.
+- `clustering.py` & `prophettraining.py`: Machine Learning modules for cycle analysis.
+- `convert_dataset.py`: Utility to process Kaggle CSV datasets into searchable vector data.
+- `data/`: Contains clinical Q&A datasets.
 
-## How to run (recommended)
-1. Create a Python environment (Python 3.8+).
-2. Install dependencies:
+## 🛠️ Installation & Setup
+
+1. **Clone the repository:**
    ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the Streamlit app:
-   ```bash
-   streamlit run main.py
-   ```
+   git clone [https://github.com/manyachawla22/PeriodPal.git](https://github.com/manyachawla22/PeriodPal.git)
+   cd PeriodPal
+   Install Dependencies:
 
-The app will build embeddings for the documents and may download model weights (embedding & generator models) the first time it runs.
+Bash
 
-## Notes for interviews
-- This is a **demo**: it uses small, local models (e.g. `gpt2`) for generation. For production you would use a stronger LLM (or hosted API).
-- Add more domain-specific documents to `data/` to improve the quality of answers.
-- You can explain the pipeline in interviews as: *embed user query → retrieve similar passages → condition LLM on retrieved passages → return grounded answer*.
+pip install streamlit pandas chromadb sentence-transformers prophet scikit-learn
+Prepare the Knowledge Base: Run the converter to process the CSV data:
 
----
-Generated at 2025-11-12T16:50:49.241277 UTC
+Bash
+
+python convert_dataset.py
+Run the App:
+
+Bash
+
+python -m streamlit run app.py
+📊 Data Source
+This project utilizes clinical Q&A datasets (Instruction/Output format) focused on menstrual health, hygiene, and reproductive disorders.
+
+Disclaimer: PeriodPal is an AI educational tool and does not provide professional medical diagnoses.
