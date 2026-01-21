@@ -4,33 +4,50 @@ from rag import setup_rag, get_ai_response
 
 st.set_page_config(page_title="PeriodPal AI", page_icon="🌸", layout="centered")
 
-st.title("🌸 PeriodPal: AI Health Assistant")
+st.markdown("""
+    <style>
+    .main { background-color: #fff5f7; }
+    .stButton>button { width: 100%; border-radius: 20px; background-color: #ff4b6b; color: white; }
+    </style>
+    """, unsafe_allow_html=True)
+
+st.title("🌸 PeriodPal: AI Clinical Consultant")
 
 if 'collection' not in st.session_state:
-    with st.spinner("Initializing Clinical Intelligence..."):
+    with st.spinner("Loading Clinical Knowledge Base..."):
         st.session_state.collection = setup_rag()
 
 with st.sidebar:
-    st.header("Daily Check-in")
-    user_day = st.number_input("What day of your cycle are you on?", min_value=1, max_value=45, value=1)
-    user_symptoms = st.text_area("Describe your symptoms or problems:", placeholder="e.g., I have sharp cramps and I'm feeling very tired.")
+    st.header("📋 Biological Profile")
+    user_age = st.number_input("Age", min_value=13, max_value=55, value=25)
     
-    analyze_btn = st.button("Generate Health Report")
+    c1, c2 = st.columns(2)
+    weight = c1.number_input("Weight (kg)", 30.0, 150.0, 60.0)
+    height = c2.number_input("Height (cm)", 100.0, 220.0, 165.0)
+    
+    user_bmi = weight / ((height/100)**2)
+    st.info(f"Calculated BMI: {round(user_bmi, 2)}")
+    
+    user_menses = st.slider("Typical Menses Length (Days)", 1, 10, 5)
+    
+    st.divider()
+    st.header("🔄 Current Status")
+    user_day = st.number_input("Current Day of Cycle", 1, 45, 1)
+    
+    analyze_btn = st.button("Generate Health Profile")
+
+st.subheader("🔍 Ask a Clinical Question")
+user_query = st.text_input("Example: What causes irregular periods?", placeholder="Type your question here...")
 
 if analyze_btn:
-    if user_symptoms:
-        with st.spinner("Analyzing your data..."):
-            ml_context = run_period_pal_engine(user_day)
-            
-            final_report = get_ai_response(
-                user_symptoms, 
-                ml_context, 
-                st.session_state.collection, 
-                user_day
-            )
+    with st.spinner("Processing Clinical Models..."):
+        ml_context, phase = run_period_pal_engine(user_day, user_age, user_bmi, user_menses)
+        
+        if user_query:
+            final_report = get_ai_response(user_query, ml_context, st.session_state.collection, phase)
             st.session_state.report = final_report
-    else:
-        st.error("Please describe your symptoms so the AI can help!")
+        else:
+            st.session_state.report = ml_context + "\n\n*Enter a question above to see related clinical guidance.*"
 
 if 'report' in st.session_state:
     st.markdown(st.session_state.report)

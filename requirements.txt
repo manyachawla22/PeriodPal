@@ -1,6 +1,9 @@
 streamlit
-pandas
-chromadb
 sentence-transformers
-prophet
-scikit-learn
+faiss-cpu
+transformers
+torch
+chromadb 
+prophet 
+pandas
+ scikit-learn

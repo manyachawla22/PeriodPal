@@ -1,43 +1,137 @@
-# 🌸 PeriodPal: AI-Powered Menstrual Health Assistant
+# 🌸 PeriodPal: AI Clinical Consultant
 
-PeriodPal is an advanced health tracking application that combines **Machine Learning (Clustering & Prophet)** with **RAG (Retrieval-Augmented Generation)** to provide personalized cycle predictions and clinical symptom analysis.
+**PeriodPal** is an AI-powered, clinical-grade *educational* health assistant that combines **Multivariate Machine Learning** with **Retrieval-Augmented Generation (RAG)** to deliver personalized, biologically grounded menstrual-cycle insights.
 
-## 🚀 Features
-- **Cycle Prediction:** Uses Facebook Prophet for time-series forecasting of next period dates.
-- **User Clustering:** Groups users into biological clusters using K-Means to identify health patterns.
-- **Medical RAG:** A custom Retrieval-Augmented Generation engine using **ChromaDB** and **Sentence Transformers** to search clinical datasets (Training/Testing Data) for symptom advice.
-- **Interactive Dashboard:** Built with Streamlit for a seamless user experience.
+> ⚠️ **Educational Use Only** — PeriodPal does **not** replace professional medical care.
+
+---
+
+## 🚀 Key Features
+
+### 🧮 Multivariate Cycle Prediction
+
+Predicts menstrual cycle length using a **Random Forest Regressor** trained on:
+
+* Age
+* Body Mass Index (BMI)
+* Menses duration
+
+### 🧬 Population Clustering (Biological Archetypes)
+
+Identifies a user’s *biological archetype* using **K-Means clustering** over population-level cycle features.
+
+### 🚨 Anomaly Detection
+
+Detects irregular or atypical cycle patterns with **Isolation Forest**, flagging potential deviations from population norms.
+
+### 📚 Intelligent FAQ Retrieval (RAG)
+
+A custom **RAG pipeline** powered by:
+
+* **Sentence Transformers** for semantic embeddings
+* **ChromaDB** for vector similarity search
+
+Provides context-aware, evidence-grounded answers to menstrual health FAQs.
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend**
+
+* Streamlit
+
+**Machine Learning**
+
+* Scikit-learn
+
+  * Random Forest Regressor
+  * K-Means Clustering
+  * Isolation Forest
+
+**Retrieval & NLP**
+
+* ChromaDB (Vector Database)
+* Sentence-Transformers (`all-MiniLM-L6-v2`)
+
+**Data Handling**
+
+* Pandas
+* NumPy
+
+---
 
 ## 📂 Project Structure
-- `app.py`: The main Streamlit interface.
-- `main_pipeline.py`: The core engine connecting ML models.
-- `rag.py`: Logic for medical document retrieval and AI responses.
-- `clustering.py` & `prophettraining.py`: Machine Learning modules for cycle analysis.
-- `convert_dataset.py`: Utility to process Kaggle CSV datasets into searchable vector data.
-- `data/`: Contains clinical Q&A datasets.
 
-## 🛠️ Installation & Setup
+```text
+├── app.py                 # Streamlit UI
+├── main_pipeline.py       # Orchestrates ML + RAG pipeline
+├── randomforest.py        # Cycle length prediction model
+├── clustering.py          # Biological archetype clustering
+├── isolationforest.py     # Anomaly detection
+├── phasecalculation.py    # Cycle phase & ovulation logic
+├── rag.py                 # RAG pipeline (ChromaDB + embeddings)
+└── data/
+    ├── FedCycleData.csv   # Population cycle dataset
+    └── master_knowledge.txt # Clinical FAQ knowledge base
+```
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/manyachawla22/PeriodPal.git](https://github.com/manyachawla22/PeriodPal.git)
-   cd PeriodPal
-   Install Dependencies:
+---
 
-Bash
+## ⚙️ Installation & Usage
 
-pip install streamlit pandas chromadb sentence-transformers prophet scikit-learn
-Prepare the Knowledge Base: Run the converter to process the CSV data:
+### 1️⃣ Clone the Repository
 
-Bash
+```bash
+git clone https://github.com/manyachawla22/PeriodPal.git
+cd PeriodPal
+```
 
-python convert_dataset.py
-Run the App:
+### 2️⃣ Install Dependencies
 
-Bash
+```bash
+pip install -r requirements.txt
+```
 
-python -m streamlit run app.py
-📊 Data Source
-This project utilizes clinical Q&A datasets (Instruction/Output format) focused on menstrual health, hygiene, and reproductive disorders.
+### 3️⃣ Run the Application
 
-Disclaimer: PeriodPal is an AI educational tool and does not provide professional medical diagnoses.
+```bash
+streamlit run app.py
+```
+
+---
+
+## ⚠️ Medical Disclaimer
+
+**PeriodPal is an AI-driven educational tool and is NOT a substitute for professional medical advice, diagnosis, or treatment.**
+
+* **Informational Purposes Only**
+  All insights, cycle predictions, and FAQ responses are derived from population-level data (FedCycleData) and are intended solely for educational use.
+
+* **Prediction Uncertainty**
+  Machine learning models provide *probabilistic estimates*. Individual biological variation may differ substantially from model outputs.
+
+* **Consult a Professional**
+  Always seek advice from a qualified healthcare provider regarding medical conditions. Never disregard professional medical guidance because of information from this application.
+
+---
+
+## 📌 Dataset Attribution
+
+This project uses the following publicly available datasets for **research and educational purposes only**:
+
+* **FedCycleData** — A large-scale menstrual cycle dataset used for population-level cycle analysis and modeling.
+* **Menstrual Health Awareness Dataset** — A curated dataset containing educational menstrual health FAQs and awareness-related content.
+
+Both datasets are sourced from **Kaggle** and are used strictly for non-commercial, educational, and research objectives.
+
+---
+
+## 💡 Author
+
+**Manya Chawla**
+Engineering Student, Delhi Technological University (DTU)
+
+---
+
+⭐ If you find this project useful, consider giving it a star!
