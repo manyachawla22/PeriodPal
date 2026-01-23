@@ -40,3 +40,4 @@ def predict_cycle_length(user_age, user_bmi, user_menses_len):
 
     prediction = model.predict(user_input)
     return float(prediction[0])
+
