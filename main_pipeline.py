@@ -22,7 +22,10 @@ def run_period_pal_engine(user_day, user_age, user_bmi, user_menses_len):
     user_persona = personas.get(user_cluster_id, {"name": f"Cluster {user_cluster_id}", "desc": "Comparing your data to similar biological profiles."})
 
     iso_model = get_anomaly_detector()
-    user_data = pd.DataFrame([[predicted_len]], columns=['LengthofCycle'])
+    user_data = pd.DataFrame(
+    [[predicted_len, user_age, user_bmi]],
+    columns=['LengthofCycle', 'Age', 'BMI'])
+
     
     anomaly_score = iso_model.decision_function(user_data)[0]
     is_anomaly = iso_model.predict(user_data)[0]

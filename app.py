@@ -51,3 +51,18 @@ if analyze_btn:
 
 if 'report' in st.session_state:
     st.markdown(st.session_state.report)
+
+from randomforest import get_model_and_report
+
+_, report = get_model_and_report()
+
+with st.expander("📊 Model Evaluation (Train/Val/Test)"):
+    st.write("Rows:", {
+        "total": report["rows_total"],
+        "train": report["rows_train"],
+        "val": report["rows_val"],
+        "test": report["rows_test"],
+    })
+    st.write("Validation metrics:", report["val_metrics"])
+    st.write("Test metrics:", report["test_metrics"])
+    st.write("Feature importance:", report["feature_importance"])

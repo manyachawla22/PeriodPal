@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 def load_kagggle_data():
-    data_path = os.path.join('data', 'FedCycleData071012 (2).csv')
+    data_path = os.path.join('data', 'FedCycleData071012.csv')
     
     if not os.path.exists(data_path):
         print(f"Error: Could not find file at {data_path}")

@@ -43,8 +43,7 @@ Provides context-aware, evidence-grounded answers to menstrual health FAQs.
 
 **Machine Learning**
 
-* Scikit-learn
-
+  * Scikit-learn
   * Random Forest Regressor
   * K-Means Clustering
   * Isolation Forest
@@ -72,7 +71,7 @@ Provides context-aware, evidence-grounded answers to menstrual health FAQs.
 ├── phasecalculation.py    # Cycle phase & ovulation logic
 ├── rag.py                 # RAG pipeline (ChromaDB + embeddings)
 └── data/
-    ├── FedCycleData.csv   # Population cycle dataset
+    ├── FedCycleData071012.csv   # Population cycle dataset
     └── master_knowledge.txt # Clinical FAQ knowledge base
 ```
 
@@ -92,6 +91,19 @@ cd PeriodPal
 ```bash
 pip install -r requirements.txt
 ```
+## 📦 Dataset Setup (Required)
+
+This project uses the **FedCycleData071012** dataset (CSV). The dataset is not committed to this repo.
+
+1) Download the dataset (commonly provided as `FedCycleData071012 (2).csv`) from a public dataset source (example: Kaggle notebooks reference this filename).  
+2) Create a folder named `data/` in the project root (if not present).
+3) Place the CSV inside `data/` and rename it exactly to:
+
+`FedCycleData071012.csv`
+
+So the path becomes:
+`data/FedCycleData071012.csv`
+
 
 ### 3️⃣ Run the Application
 

@@ -1,4 +1,12 @@
-__pycache__/ 
+
 tempCodeRunnerFile.py 
-data/
+
+__pycache__/
+*.pyc
+
+# Local archives
+*.zip
+
+# Datasets
+data/*.csv
 
